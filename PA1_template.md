@@ -101,11 +101,10 @@ First a quick plot to get a sense of it:
 ```r
 library(ggplot2)
 
-g <- ggplot(activity, aes(x=interval,y=steps))
-g + geom_point(na.rm=TRUE) + scale_x_discrete("Interval", c(400,800,1200,1600,2000))
+# Plot suppresed to try to get html file <1MB
+#g <- ggplot(activity, aes(x=interval,y=steps))
+#g + geom_point(na.rm=TRUE) + scale_x_discrete("Interval", c(400,800,1200,1600,2000))
 ```
-
-![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 This shows steps per 5 minute interval throughout the day.  Because military time jumps from, e.g., from 1155 to 1200, there are gaps along the horizontal axis.  But this gives a reasonable sense of the typical activity level throughout the day.  Very little activity until about 0600 (6am) and trailing off again after about 2100 (9pm)
 
@@ -255,6 +254,7 @@ rug(daily)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+
 ## Are there differences in activity patterns between weekdays and weekends?
 
 Let's take a look at the median steps per interval separated by day of the week.  0 = Sunday, 6 = Saturday.
@@ -262,14 +262,9 @@ Let's take a look at the median steps per interval separated by day of the week.
 ```r
 median.steps.thru.day.by.wday.imputed <- ddply( imputed.activity, .(interval,wday), summarize, median.steps=median(steps, na.rm=TRUE))
 
-g <- ggplot(median.steps.thru.day.by.wday.imputed, aes(x=interval,y=median.steps))
-g + geom_line(aes(group=wday)) + scale_x_discrete("Interval", c(400,800,1200,1600,2000)) + facet_grid(wday~.)
-```
-
-![](PA1_template_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
-
-```r
-#qplot(interval, median.steps, data = median.steps.thru.day.by.wday.imputed, geom="line", group=1, facets=wday~.)
+# Plot suppresed to try to get html file <1MB
+#g <- ggplot(median.steps.thru.day.by.wday.imputed, aes(x=interval,y=median.steps))
+#g + geom_line(aes(group=wday)) + scale_x_discrete("Interval", c(400,800,1200,1600,2000)) + facet_grid(wday~.)
 ```
 
 All days have heavy activity in the morning and evening.  Weekdays have little activity between 9am to 5pm.  But the weekends have more consistent activity throughout the day.
@@ -284,7 +279,3 @@ g + geom_line(aes(group=wend)) + scale_x_discrete("Interval", c(400,800,1200,160
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
-
-```r
-#qplot(interval, mean.steps, data = mean.steps.thru.day.by.wend.imputed, geom="line", facets=wend~., group=1)
-```
